@@ -1,0 +1,21 @@
+[package]
+name = "file-storage-client"
+version = "0.1.0"
+authors = ["Hiroki Tanaka <support@kumano-te.com>"]
+license = "MIT"
+edition = "2021"
+description = "Rust implemented simple file storage client."
+repository = "https://github.com/kumanote/file-storage-client-rs"
+readme = "README.md"
+keywords = ["GCS", "NFS", "client"]
+
+[dependencies]
+anyhow = { version = "1.0", features = ["backtrace"] }
+thiserror = "1.0"
+tokio = { version = "1", features = ["full"] }
+tokio-util = { version = "0.7", features = ["full"] }
+futures = "0.3"
+futures-util = { version = "0.3", features = ["alloc"] }
+cloud-storage = { version = "0.11.0", features = ["global-client"] }
+
+[dev-dependencies]
