@@ -4,6 +4,7 @@ mod local_storage;
 
 use futures::Stream;
 use std::path::{Path, PathBuf};
+use std::pin::Pin;
 
 pub use error::Error;
 pub type Result<T> = core::result::Result<T, Error>;
@@ -87,18 +88,18 @@ impl FileStorageClient {
     pub async fn get_data(
         &self,
         filename: &str,
-    ) -> Result<Box<dyn Stream<Item = Result<u8>> + Unpin>> {
+    ) -> Result<Pin<Box<dyn Stream<Item = Result<u8>> + Unpin>>> {
         match self {
             Self::LocalStorage { directory } => {
                 let stream = local_storage::get_data(directory, filename).await?;
-                Ok(Box::new(stream))
+                Ok(Box::pin(stream))
             }
             Self::GoogleCloudStorage {
                 bucket_name,
                 download_dir: _,
             } => {
                 let stream = google_could_storage::get_data(bucket_name.as_str(), filename).await?;
-                Ok(Box::new(stream))
+                Ok(Box::pin(stream))
             }
         }
     }

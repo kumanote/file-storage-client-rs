@@ -30,7 +30,7 @@ Please install this packages as follows.
 
 ```toml
 [dependencies]
-file-storage-client = { version = "0.1.0", git = "https://github.com/kumanote/file-storage-client-rs", branch = "main" }
+file-storage-client = { version = "0.1.1", git = "https://github.com/kumanote/file-storage-client-rs", branch = "main" }
 ```
 
 **rust files**
